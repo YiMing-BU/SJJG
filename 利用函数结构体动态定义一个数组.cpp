@@ -1,95 +1,95 @@
-/*Ê±¼ä2020Äê3ÔÂ17ÈÕ1£º24
-Ä¿µÄ£ºÀûÓÃº¯Êı½á¹¹Ìå¶¯Ì¬¶¨ÒåÒ»¸öÊı×é£¬²¢¶ÔÆä½øĞĞÒ»Ğ©²Ù×÷
+/*
+ç›®çš„ï¼šåˆ©ç”¨å‡½æ•°ç»“æ„ä½“åŠ¨æ€å®šä¹‰ä¸€ä¸ªæ•°ç»„ï¼Œå¹¶å¯¹å…¶è¿›è¡Œä¸€äº›æ“ä½œ
 */
 # include<stdio.h>
 # include<malloc.h>
 # include <stdlib.h>
 
 
-//¡°Êı¾İ½á¹¹¡±¶¨ÒåÁËÒ»¸öÊı¾İÀàĞÍ,¸ÃÊı¾İÀàĞÍµÄÃû×Ö½Ğ×östuruct Arr,¸ÃÊı¾İÀàĞÍº¬ÓĞÈı¸ö³ÉÔ±
+//â€œæ•°æ®ç»“æ„â€å®šä¹‰äº†ä¸€ä¸ªæ•°æ®ç±»å‹,è¯¥æ•°æ®ç±»å‹çš„åå­—å«åšsturuct Arr,è¯¥æ•°æ®ç±»å‹å«æœ‰ä¸‰ä¸ªæˆå‘˜
 struct Arr {
-	int *pBase;//´æ´¢µÄÊÇÊı×éµÚÒ»¸öÔªËØµÄµØÖ·
-	int len;//Êı×éËùÄÜÈİÄÉµÄ×î´óÔªËØµÄ¸öÊı
-	int cnt;//µ±Ç°Êı×éÓĞĞ§ÔªËØµÄ¸öÊı
-	//int increment;//×Ô¶¯Ôö³¤Òò×Ó£¬Ôö³¤µÄÎ»ÊıÎªÔ­Î»ÊıµÄÒ»±¶
+	int *pBase;//å­˜å‚¨çš„æ˜¯æ•°ç»„ç¬¬ä¸€ä¸ªå…ƒç´ çš„åœ°å€
+	int len;//æ•°ç»„æ‰€èƒ½å®¹çº³çš„æœ€å¤§å…ƒç´ çš„ä¸ªæ•°
+	int cnt;//å½“å‰æ•°ç»„æœ‰æ•ˆå…ƒç´ çš„ä¸ªæ•°
+	//int increment;//è‡ªåŠ¨å¢é•¿å› å­ï¼Œå¢é•¿çš„ä½æ•°ä¸ºåŸä½æ•°çš„ä¸€å€
 };
 
 
-/*¶Ôº¯ÊıµÄÉùÃ÷*/
-void init_arr(struct Arr *inarr, int ien);//³õÊ¼»¯µÄ·½·¨
-bool append_arr(struct Arr *aparr, int an); //Ä©Î²×·¼Ó
-bool insert_arr(struct Arr *inarr, int pos, int an); //ÖĞ¼ä²åÈë  posµÄÖµ´Ó1¿ªÊ¼£¬ÏÂ±êÎªÁãµÄÔªËØÊÇµÚÒ»¸ö
-bool delete_arr(struct Arr *dearr, int pos, int *su);//É¾³ı  suÎªsubtractive µÄËõĞ´
-void get(struct Arr *gearr, int loc); //»ñÈ¡ÏÂ±êÎªXµÄÄ³Ò»¸öÖµ
-bool is_empty(struct Arr *isarr); //ÊÇ·ñÎª¿Õ
-bool is_full(struct Arr *isarr); //ÊÇ·ñÂú
-void sort_arr(struct Arr *soarr); //ÅÅĞò
-void show_arr(struct Arr *sharr); //ÏÔÊ¾Êä³ö
-void inversion_arr(struct Arr *inarr); //µ¹ÖÃ
+/*å¯¹å‡½æ•°çš„å£°æ˜*/
+void init_arr(struct Arr *inarr, int ien);//åˆå§‹åŒ–çš„æ–¹æ³•
+bool append_arr(struct Arr *aparr, int an); //æœ«å°¾è¿½åŠ 
+bool insert_arr(struct Arr *inarr, int pos, int an); //ä¸­é—´æ’å…¥  posçš„å€¼ä»1å¼€å§‹ï¼Œä¸‹æ ‡ä¸ºé›¶çš„å…ƒç´ æ˜¯ç¬¬ä¸€ä¸ª
+bool delete_arr(struct Arr *dearr, int pos, int *su);//åˆ é™¤  suä¸ºsubtractive çš„ç¼©å†™
+void get(struct Arr *gearr, int loc); //è·å–ä¸‹æ ‡ä¸ºXçš„æŸä¸€ä¸ªå€¼
+bool is_empty(struct Arr *isarr); //æ˜¯å¦ä¸ºç©º
+bool is_full(struct Arr *isarr); //æ˜¯å¦æ»¡
+void sort_arr(struct Arr *soarr); //æ’åº
+void show_arr(struct Arr *sharr); //æ˜¾ç¤ºè¾“å‡º
+void inversion_arr(struct Arr *inarr); //å€’ç½®
 
 
-/*Ö÷º¯Êı¡°½øĞĞº¯Êıµ÷ÓÃ¡±*/
+/*ä¸»å‡½æ•°â€œè¿›è¡Œå‡½æ•°è°ƒç”¨â€*/
 int main(void) {
 	int len = 5;
 	int su;
-	struct Arr arr;//¶¨ÒåÒ»¸ö½á¹¹Ìå±äÁ¿£¬ÏµÍ³ÒÑ¾­·ÖÅäÁËÄÚ´æ
+	struct Arr arr;//å®šä¹‰ä¸€ä¸ªç»“æ„ä½“å˜é‡ï¼Œç³»ç»Ÿå·²ç»åˆ†é…äº†å†…å­˜
 
-	init_arr(&arr, len);	//µ÷ÓÃinitº¯ÊıÊ¹º¯Êı³õÊ¼»¯
+	init_arr(&arr, len);	//è°ƒç”¨initå‡½æ•°ä½¿å‡½æ•°åˆå§‹åŒ–
 
-	append_arr(&arr, 1);	//µ÷ÓÃº¯ÊıappendÅĞ¶ÏÊÇ·ñ¿ÉÒÔÔö¼ÓÓĞĞ§ÔªËØ
+	append_arr(&arr, 1);	//è°ƒç”¨å‡½æ•°appendåˆ¤æ–­æ˜¯å¦å¯ä»¥å¢åŠ æœ‰æ•ˆå…ƒç´ 
 	append_arr(&arr, 2);
 	append_arr(&arr, 3);
 	append_arr(&arr, 4);
 	insert_arr(&arr, 2, 999);
 	if (delete_arr(&arr, 1, &su)) {
-		printf("É¾³ı³É¹¦,É¾³ıµÄÔªËØÎª£º%d\n", su);
+		printf("åˆ é™¤æˆåŠŸ,åˆ é™¤çš„å…ƒç´ ä¸ºï¼š%d\n", su);
 	} else {
-		printf("É¾³ıÊ§°Ü");
+		printf("åˆ é™¤å¤±è´¥");
 	}
 	if (append_arr(&arr, 5)) {
-		printf("×·¼Ó³É¹¦\n")	;
+		printf("è¿½åŠ æˆåŠŸ\n")	;
 	} else {
-		printf("×·¼ÓÊ§°Ü\n");
+		printf("è¿½åŠ å¤±è´¥\n");
 	}
 	get(&arr, 2);
-	show_arr(&arr);		//µ÷ÓÃº¯ÊıshowÊä³öÊı×é
-	inversion_arr(&arr);	//µ÷ÓÃº¯Êıinversionµ¹ÖÃÊı×éÔªËØ
-	printf("\n \nÊı×éµ¹ÖÃºóÎª£º\n");
+	show_arr(&arr);		//è°ƒç”¨å‡½æ•°showè¾“å‡ºæ•°ç»„
+	inversion_arr(&arr);	//è°ƒç”¨å‡½æ•°inversionå€’ç½®æ•°ç»„å…ƒç´ 
+	printf("\n \næ•°ç»„å€’ç½®åä¸ºï¼š\n");
 	show_arr(&arr);
-	sort_arr(&arr);		//µ÷ÓÃº¯Êısort½«Êı×é½øĞĞÅÅĞò
-	printf("\n \nÊı×éÅÅĞòºóÎª£º\n");
+	sort_arr(&arr);		//è°ƒç”¨å‡½æ•°sortå°†æ•°ç»„è¿›è¡Œæ’åº
+	printf("\n \næ•°ç»„æ’åºåä¸ºï¼š\n");
 	show_arr(&arr);
 	return 0;
 }
 
 
-/*´Ëº¯Êı½øĞĞ³õÊ¼»¯*/
+/*æ­¤å‡½æ•°è¿›è¡Œåˆå§‹åŒ–*/
 void init_arr(struct Arr *inarr, int len) {
-	//Ê×ÏÈÇëÇóÏµÍ³·ÖÅäÒ»¶¨ÄÚ´æ¿Õ¼ä
+	//é¦–å…ˆè¯·æ±‚ç³»ç»Ÿåˆ†é…ä¸€å®šå†…å­˜ç©ºé—´
 	inarr->pBase = (int *)malloc(sizeof(struct Arr) * len);
 
-	//Í¨¹ıifÓï¾äÅĞ¶ÏÏµÍ³ÊÇ·ñ³É¹¦·ÖÅäÁËÄÚ´æ
-	if (NULL == inarr->pBase) { //ÅĞ¶ÏpBaseÊÇ·ñÎª¿Õ
-		printf("¶¯Ì¬ÄÚ´æ·ÖÅäÊ§°Ü£¡\n");
-		exit(-1);//ÖÕÖ¹Õû¸ö³ÌĞò£¬ĞèÒªÔÚ¿ªÍ·Ìí¼ÓstdlibÍ·ÎÄ¼ş
+	//é€šè¿‡ifè¯­å¥åˆ¤æ–­ç³»ç»Ÿæ˜¯å¦æˆåŠŸåˆ†é…äº†å†…å­˜
+	if (NULL == inarr->pBase) { //åˆ¤æ–­pBaseæ˜¯å¦ä¸ºç©º
+		printf("åŠ¨æ€å†…å­˜åˆ†é…å¤±è´¥ï¼\n");
+		exit(-1);//ç»ˆæ­¢æ•´ä¸ªç¨‹åºï¼Œéœ€è¦åœ¨å¼€å¤´æ·»åŠ stdlibå¤´æ–‡ä»¶
 	} else {
-		inarr->len = len;	//½«Ö´ĞĞºóµÄÊı×é³¤¶È¸³¸ø½á¹¹ÌåÖĞµÄ³ÉÔ±len
-		inarr->cnt = 0;		//Êı×éµÄÓĞĞ§ÔªËØ¸öÊı
+		inarr->len = len;	//å°†æ‰§è¡Œåçš„æ•°ç»„é•¿åº¦èµ‹ç»™ç»“æ„ä½“ä¸­çš„æˆå‘˜len
+		inarr->cnt = 0;		//æ•°ç»„çš„æœ‰æ•ˆå…ƒç´ ä¸ªæ•°
 	}
 
 	return;
 }
 
-/*´Ëº¯ÊıÓÃÓÚÅĞ¶Ïº¯ÊıÓĞĞ§ÔªËØÊÇ·ñÎª¿Õ£¬¿Õ·µ»ØÕæ£¬·Ç¿Õ·µ»Ø¼Ù*/
+/*æ­¤å‡½æ•°ç”¨äºåˆ¤æ–­å‡½æ•°æœ‰æ•ˆå…ƒç´ æ˜¯å¦ä¸ºç©ºï¼Œç©ºè¿”å›çœŸï¼Œéç©ºè¿”å›å‡*/
 bool is_empty(struct Arr *isarr) {
-	if (0 == isarr->cnt)	//½á¹¹ÌåµÄ³ÉÔ±cnt´ú±íÁËÊı×éÓĞĞ§ÔªËØµÄ¸öÊı
-		return true;	//·µ»ØÕæ
+	if (0 == isarr->cnt)	//ç»“æ„ä½“çš„æˆå‘˜cntä»£è¡¨äº†æ•°ç»„æœ‰æ•ˆå…ƒç´ çš„ä¸ªæ•°
+		return true;	//è¿”å›çœŸ
 	else
-		return false;	//·µ»Ø¼Ù
+		return false;	//è¿”å›å‡
 
 }
 
-/*´Ëº¯ÊıÓÃÓÚÅĞ¶ÏÊı×éÓĞĞ§ÔªËØÊÇ·ñÓëÊı×é³¤¶ÈÏàµÈ£¬ÓÃÓÚÅĞ¶ÏÊı×éÊÇ·ñÂúÖµ*/
+/*æ­¤å‡½æ•°ç”¨äºåˆ¤æ–­æ•°ç»„æœ‰æ•ˆå…ƒç´ æ˜¯å¦ä¸æ•°ç»„é•¿åº¦ç›¸ç­‰ï¼Œç”¨äºåˆ¤æ–­æ•°ç»„æ˜¯å¦æ»¡å€¼*/
 bool is_full(struct Arr *isarr) {
 	if (isarr->cnt == isarr->len)
 		return true;
@@ -97,58 +97,58 @@ bool is_full(struct Arr *isarr) {
 		return false;
 }
 
-/*´Ëº¯ÊıÓÃÓÚÊı×éµÄÊä³ö*/
+/*æ­¤å‡½æ•°ç”¨äºæ•°ç»„çš„è¾“å‡º*/
 void show_arr(struct Arr *sharr) {
-	if (is_empty(sharr)) { //´ËÓï¾äÍ¨¹ıº¯Êıis_emptyÀ´ÅĞ¶ÏÊÇ·ñÎªÎŞĞ§¿ÕÊı×é
-		printf("Êı×éÎª¿Õ£¡\n");
+	if (is_empty(sharr)) { //æ­¤è¯­å¥é€šè¿‡å‡½æ•°is_emptyæ¥åˆ¤æ–­æ˜¯å¦ä¸ºæ— æ•ˆç©ºæ•°ç»„
+		printf("æ•°ç»„ä¸ºç©ºï¼\n");
 	} else {
 		if (is_full(sharr))
-			printf("Êı×éÒÑÂú\n");
+			printf("æ•°ç»„å·²æ»¡\n");
 		else
-			printf("Êı×éÎ´Âú\n");
-		printf("Êı×éÓĞĞ§ÄÚÈİ£º\n");
+			printf("æ•°ç»„æœªæ»¡\n");
+		printf("æ•°ç»„æœ‰æ•ˆå†…å®¹ï¼š\n");
 		for (int i = 0; i < sharr->len; i++) {
 			printf("  %d", sharr->pBase[i]);
 			if (i > sharr->cnt)
-				printf("(´ËÔªËØÎª¿Õ)");
+				printf("(æ­¤å…ƒç´ ä¸ºç©º)");
 		}
-		printf("\n´ËÊı×éµÄÓĞĞ§Î»ÊıÎª£º%d", sharr->cnt);
+		printf("\næ­¤æ•°ç»„çš„æœ‰æ•ˆä½æ•°ä¸ºï¼š%d", sharr->cnt);
 	}
 
 }
 
-/*´Ëº¯ÊıÏÈÅĞ¶ÏÊı×éÓĞĞ§ÊıÖµÊÇ·ñÒÑÂú£¬È»ºó¾ö¶¨ÊÇ·ñ×·¼Ó*/
-bool append_arr(struct Arr *aparr, int na) { //naÊÇnewly addedµÄËõĞ´£¬´ú±íÁËĞÂ¼ÓµÄÔªËØ
+/*æ­¤å‡½æ•°å…ˆåˆ¤æ–­æ•°ç»„æœ‰æ•ˆæ•°å€¼æ˜¯å¦å·²æ»¡ï¼Œç„¶åå†³å®šæ˜¯å¦è¿½åŠ */
+bool append_arr(struct Arr *aparr, int na) { //naæ˜¯newly addedçš„ç¼©å†™ï¼Œä»£è¡¨äº†æ–°åŠ çš„å…ƒç´ 
 	if (is_full(aparr)) {
-		return false;//ÂúÊ±·µ»Øfalse
-	} else { //·ñÔò×·¼Ó
+		return false;//æ»¡æ—¶è¿”å›false
+	} else { //å¦åˆ™è¿½åŠ 
 		aparr->pBase[aparr->cnt] = na;
-		/*ÒòÎªÇ°Ò»¸öÓĞĞ§ÔªËØµÄÎ»ÊıÕıºÃ¶ÔÓ¦×ÅÏÂÒ»¸öÔªËØµÄÏÂ±ê£¬
-		ËùÒÔ¿ÉÒÔ½«Ôö¼ÓÔªËØµÄÏÂ±êÓÃÓĞĞ§Öµ±íÊ¾*/
-		(aparr->cnt)++;//×·¼ÓÔªËØºóÓĞĞ§ÔªËØµÄ¸öÊıÒ²Ôö¼Ó
+		/*å› ä¸ºå‰ä¸€ä¸ªæœ‰æ•ˆå…ƒç´ çš„ä½æ•°æ­£å¥½å¯¹åº”ç€ä¸‹ä¸€ä¸ªå…ƒç´ çš„ä¸‹æ ‡ï¼Œ
+		æ‰€ä»¥å¯ä»¥å°†å¢åŠ å…ƒç´ çš„ä¸‹æ ‡ç”¨æœ‰æ•ˆå€¼è¡¨ç¤º*/
+		(aparr->cnt)++;//è¿½åŠ å…ƒç´ åæœ‰æ•ˆå…ƒç´ çš„ä¸ªæ•°ä¹Ÿå¢åŠ 
 		return true;
 	}
 }
 
-/*´Ëº¯ÊıÔÚÒ»ÓĞÊı×éÔªËØÖĞ²åÈëÒ»¸öĞÂµÄÊı×é*/
+/*æ­¤å‡½æ•°åœ¨ä¸€æœ‰æ•°ç»„å…ƒç´ ä¸­æ’å…¥ä¸€ä¸ªæ–°çš„æ•°ç»„*/
 bool insert_arr(struct Arr *inarr, int pos, int an)
 
-//pos´ú±íÁËÊı×éÖĞÔªËØµÄÎ»ÖÃ£¬¼°ÔÚµÚposÎ»ÔªËØÇ°²åÈëÒ»¸öan
+//posä»£è¡¨äº†æ•°ç»„ä¸­å…ƒç´ çš„ä½ç½®ï¼ŒåŠåœ¨ç¬¬posä½å…ƒç´ å‰æ’å…¥ä¸€ä¸ªan
 {
 	int i;
-	if (pos < 1 || pos > inarr->cnt + 1) //Ê×ÏÈÅĞ¶Ï´ı²åÈëµÄÎ»ÖÃÊÇ·ñÔÊĞí²åÈë
+	if (pos < 1 || pos > inarr->cnt + 1) //é¦–å…ˆåˆ¤æ–­å¾…æ’å…¥çš„ä½ç½®æ˜¯å¦å…è®¸æ’å…¥
 		return false;
 	else {
-		for (i = inarr->cnt - 1; i >= pos - 1; i--) { //´Ó×îºóÒ»Î»ÓĞĞ§Öµ¿ªÊ¼ÏòºóÒÆ¶¯Ò»Î»
+		for (i = inarr->cnt - 1; i >= pos - 1; i--) { //ä»æœ€åä¸€ä½æœ‰æ•ˆå€¼å¼€å§‹å‘åç§»åŠ¨ä¸€ä½
 			inarr->pBase[i + 1] = inarr->pBase[i];
 		}
-		inarr->pBase[pos - 1] = an;//½«´ı²åÈëµÄÖµ¸³¸ø¿Õ³öµÄÎ»µÄÔªËØ
-		(inarr->cnt)++;//½«Êı×éµÄÓĞĞ§ÔªËØÔö¼Ó
+		inarr->pBase[pos - 1] = an;//å°†å¾…æ’å…¥çš„å€¼èµ‹ç»™ç©ºå‡ºçš„ä½çš„å…ƒç´ 
+		(inarr->cnt)++;//å°†æ•°ç»„çš„æœ‰æ•ˆå…ƒç´ å¢åŠ 
 		return true;
 	}
 }
 
-/*´Ëº¯Êı¿ÉÒÔÉ¾³ıÊı×éÖĞµÄÈÎÒâÒ»¸öÔªËØ*/
+/*æ­¤å‡½æ•°å¯ä»¥åˆ é™¤æ•°ç»„ä¸­çš„ä»»æ„ä¸€ä¸ªå…ƒç´ */
 bool delete_arr(struct Arr *dearr, int pos, int *su) {
 	int i;
 
@@ -157,31 +157,31 @@ bool delete_arr(struct Arr *dearr, int pos, int *su) {
 	if (pos < 1 || pos > dearr->cnt)
 		return false;
 
-	*su = dearr->pBase[pos - 1];//ÔÚ½«ÖµÉ¾³ıÇ°½«Öµ±£´æ£¬ÒÔ±¸Êä³ö
+	*su = dearr->pBase[pos - 1];//åœ¨å°†å€¼åˆ é™¤å‰å°†å€¼ä¿å­˜ï¼Œä»¥å¤‡è¾“å‡º
 
-	for (i = pos; i < dearr->cnt; i++) { //Ö±½Ó½«É¾³ıÔªËØµÄºóÒ»Î»µÄÖµ¸²¸Ç´ıÉ¾³ıµÄÖµ£¬²¢ÒÀ´ÎÀàÍÆ
+	for (i = pos; i < dearr->cnt; i++) { //ç›´æ¥å°†åˆ é™¤å…ƒç´ çš„åä¸€ä½çš„å€¼è¦†ç›–å¾…åˆ é™¤çš„å€¼ï¼Œå¹¶ä¾æ¬¡ç±»æ¨
 		dearr->pBase[i - 1] = dearr->pBase[i];
 	}
 
-	(dearr->cnt)--;//ÒòÎªÉ¾³ıÁËÒ»Î»£¬ËùÒÔ¼õÈ¥Ò»¸öÓĞĞ§Öµ¡£
+	(dearr->cnt)--;//å› ä¸ºåˆ é™¤äº†ä¸€ä½ï¼Œæ‰€ä»¥å‡å»ä¸€ä¸ªæœ‰æ•ˆå€¼ã€‚
 	return true;
 }
 
-/*´Ëº¯Êı½«Êä³öÖ¸¶¨ÏÂ±êÔªËØµÄÊıÖµ*/
-void get(struct Arr *gearr, int loc) { //locÊÇlocationµÄËõĞ´
+/*æ­¤å‡½æ•°å°†è¾“å‡ºæŒ‡å®šä¸‹æ ‡å…ƒç´ çš„æ•°å€¼*/
+void get(struct Arr *gearr, int loc) { //locæ˜¯locationçš„ç¼©å†™
 	if (loc < 1 || loc > gearr->cnt)
-		printf("´ËÎ»ÖÃÎŞÊıÖµ");
+		printf("æ­¤ä½ç½®æ— æ•°å€¼");
 	else
-		printf("´ËÎ»ÖÃµÄÊıÖµÎª£º%d\n", gearr->pBase[loc - 1]);
+		printf("æ­¤ä½ç½®çš„æ•°å€¼ä¸ºï¼š%d\n", gearr->pBase[loc - 1]);
 
 }
 
-/*´Ëº¯Êı½«Êı×éÄÚµÄËùÓĞÔªËØµ¹ÖÃ*/
+/*æ­¤å‡½æ•°å°†æ•°ç»„å†…çš„æ‰€æœ‰å…ƒç´ å€’ç½®*/
 void inversion_arr(struct Arr *inarr) {
 	int i = 0, j;
 	int t;
 	j = inarr->cnt - 1;
-	//Ê¹µÚÒ»¸öºÍ×îºóÒ»¸öÔªËØµÄÖµ»¥»»£¬ÇÒÒÀ´ÎÀàÍÆ¡£×îÖÕÊ¹iºÍj¶¼Ö¸ÏòÒ»¸ö»òÕßÖµÏàµÈÊ¹Í£Ö¹
+	//ä½¿ç¬¬ä¸€ä¸ªå’Œæœ€åä¸€ä¸ªå…ƒç´ çš„å€¼äº’æ¢ï¼Œä¸”ä¾æ¬¡ç±»æ¨ã€‚æœ€ç»ˆä½¿iå’Œjéƒ½æŒ‡å‘ä¸€ä¸ªæˆ–è€…å€¼ç›¸ç­‰ä½¿åœæ­¢
 	while (i < j) {
 		t = inarr->pBase[i];
 		inarr->pBase[i] = inarr->pBase[j];
@@ -192,7 +192,7 @@ void inversion_arr(struct Arr *inarr) {
 	return;
 }
 
-/*´Ëº¯Êı½«Êı×éÔªËØ½øĞĞÅÅĞò*/
+/*æ­¤å‡½æ•°å°†æ•°ç»„å…ƒç´ è¿›è¡Œæ’åº*/
 void sort_arr(struct Arr *soarr) {
 	int i, j, t;
 	for (i = 0; i < soarr->cnt; ++i) {
